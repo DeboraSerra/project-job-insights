@@ -1,5 +1,6 @@
 from src import jobs
 
+
 def get_unique_job_types(path):
     """Checks all different job types and returns a list of them
 
@@ -65,7 +66,7 @@ def get_unique_industries(path):
     data = jobs.read(path)
     industries = []
     for item in data:
-        if item['industry'] not in industries:
+        if item['industry'] not in industries and item['industry'] != '':
             industries.append(item['industry'])
     return industries
 
@@ -109,7 +110,12 @@ def get_max_salary(path):
     int
         The maximum salary paid out of all job opportunities
     """
-    pass
+    data = jobs.read(path)
+    salaries = []
+    for info in data:
+        if info['max_salary'] != '':
+            salaries.append(info['max_salary'])
+    return max(salaries)
 
 
 def get_min_salary(path):
@@ -127,7 +133,12 @@ def get_min_salary(path):
     int
         The minimum salary paid out of all job opportunities
     """
-    pass
+    data = jobs.read(path)
+    salaries = []
+    for info in data:
+        if info['min_salary'] != '':
+            salaries.append(info['min_salary'])
+    return min(salaries)
 
 
 def matches_salary_range(job, salary):
