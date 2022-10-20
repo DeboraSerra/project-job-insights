@@ -184,21 +184,29 @@ def min_salary_tests():
     result_min_salary = sort_by(dict_jobs, "min_salary")
     for index in range(len(result_min_salary) + 1):
         if index < len(result_min_salary) - 1:
-            assert result_min_salary[index]['min_salary'] <= result_min_salary[index + 1]['min_salary']
+            assert (
+                result_min_salary[index]["min_salary"]
+                <= result_min_salary[index + 1]["min_salary"]
+            )
         else:
-            assert result_min_salary[index] == ''
+            assert result_min_salary[index] == ""
 
 
 def max_salary_tests():
     result_max_salary = sort_by(dict_jobs, "max_salary")
     for index in range(len(result_max_salary) + 1):
         if index < len(result_max_salary) - 1:
-            assert result_max_salary[index]['max_salary'] >= result_max_salary[index + 1]['max_salary']
+            assert (
+                result_max_salary[index]["max_salary"]
+                >= result_max_salary[index + 1]["max_salary"]
+            )
         else:
-            assert result_max_salary[index]['max_salary'] == ''
+            assert result_max_salary[index]["max_salary"] == ""
 
 
 def date_posted_tests():
     result_date = sort_by(dict_jobs, "date_posted")
     for index in range(len(result_date) + 1):
-        assert date.fromisoformat(result_date[index]['date_posted']) >= date.fromisoformat(result_date[index + 1]['date_posted'])
+        assert date.fromisoformat(
+            result_date[index]["date_posted"]
+        ) >= date.fromisoformat(result_date[index + 1]["date_posted"])
