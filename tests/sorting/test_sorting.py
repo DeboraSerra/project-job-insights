@@ -220,5 +220,5 @@ def date_posted_tests():
 
 
 def wrong_criteria_test():
-    result_wrong_criteria = sort_by(dict_jobs, 'wrong')
-    assert result_wrong_criteria is None
+    with pytest.raises(ValueError):
+        sort_by(dict_jobs, 'wrong')
