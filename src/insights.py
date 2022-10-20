@@ -1,3 +1,5 @@
+from src import jobs
+
 def get_unique_job_types(path):
     """Checks all different job types and returns a list of them
 
@@ -17,9 +19,7 @@ def get_unique_job_types(path):
     job_types = []
     for item in data:
         if item['job_type'] not in job_types:
-            job_types.append({item['job_type']: { "jobs": 1 }})
-        else:
-            job_types[item['job_type']]['jobs'] += 1
+            job_types.append(item['job_type'])
     return job_types
 
 
@@ -38,6 +38,8 @@ def filter_by_job_type(jobs, job_type):
     list
         List of jobs with provided job_type
     """
+    if job_type == '':
+        return []
     filtered_jobs = []
     for job in jobs:
         if job_type in job['job_type']:
@@ -64,9 +66,7 @@ def get_unique_industries(path):
     industries = []
     for item in data:
         if item['industry'] not in industries:
-            industries.append({item['industry']: { "jobs": 1 }})
-        else:
-            industries[item['industry']]['jobs'] += 1
+            industries.append(item['industry'])
     return industries
 
 
@@ -85,6 +85,8 @@ def filter_by_industry(jobs, industry):
     list
         List of jobs with provided industry
     """
+    if industry == '':
+        return []
     filtered_industries = []
     for job in jobs:
         if industry in job['industry']:
