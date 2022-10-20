@@ -88,7 +88,7 @@ dict_jobs = [
         "id": "345",
     },
     {
-        "job_title": "Regional Vice President – Partner Development (East Coast)",
+        "job_title": "Regional Vice President",
         "company": "PlanMember Financial",
         "state": "NY",
         "city": "New York",
@@ -178,10 +178,13 @@ def test_sort_by_criteria():
     min_salary_tests()
     max_salary_tests()
     date_posted_tests()
+    wrong_criteria_test()
 
 
 def min_salary_tests():
     result_min_salary = sort_by(dict_jobs, "min_salary")
+    if not result_min_salary:
+        return False
     for index in range(len(result_min_salary) + 1):
         if index < len(result_min_salary) - 1:
             assert (
@@ -194,6 +197,8 @@ def min_salary_tests():
 
 def max_salary_tests():
     result_max_salary = sort_by(dict_jobs, "max_salary")
+    if not result_max_salary:
+        return False
     for index in range(len(result_max_salary) + 1):
         if index < len(result_max_salary) - 1:
             assert (
@@ -206,7 +211,14 @@ def max_salary_tests():
 
 def date_posted_tests():
     result_date = sort_by(dict_jobs, "date_posted")
+    if not result_date:
+        return False
     for index in range(len(result_date) + 1):
         assert date.fromisoformat(
             result_date[index]["date_posted"]
         ) >= date.fromisoformat(result_date[index + 1]["date_posted"])
+
+
+def wrong_criteria_test():
+    result_wrong_criteria = sort_by(dict_jobs, 'wrong')
+    assert result_wrong_criteria is None
