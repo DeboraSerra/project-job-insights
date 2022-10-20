@@ -13,7 +13,14 @@ def get_unique_job_types(path):
     list
         List of unique job types
     """
-    return []
+    data = jobs.read(path)
+    job_types = []
+    for item in data:
+        if item['job_type'] not in job_types:
+            job_types.append({item['job_type']: { "jobs": 1 }})
+        else:
+            job_types[item['job_type']]['jobs'] += 1
+    return job_types
 
 
 def filter_by_job_type(jobs, job_type):
@@ -31,7 +38,11 @@ def filter_by_job_type(jobs, job_type):
     list
         List of jobs with provided job_type
     """
-    return []
+    filtered_jobs = []
+    for job in jobs:
+        if job_type in job['job_type']:
+            filtered_jobs.append(job)
+    return filtered_jobs
 
 
 def get_unique_industries(path):
@@ -49,7 +60,14 @@ def get_unique_industries(path):
     list
         List of unique industries
     """
-    return []
+    data = jobs.read(path)
+    industries = []
+    for item in data:
+        if item['industry'] not in industries:
+            industries.append({item['industry']: { "jobs": 1 }})
+        else:
+            industries[item['industry']]['jobs'] += 1
+    return industries
 
 
 def filter_by_industry(jobs, industry):
@@ -67,7 +85,11 @@ def filter_by_industry(jobs, industry):
     list
         List of jobs with provided industry
     """
-    return []
+    filtered_industries = []
+    for job in jobs:
+        if industry in job['industry']:
+            filtered_industries.append(job)
+    return filtered_industries
 
 
 def get_max_salary(path):
